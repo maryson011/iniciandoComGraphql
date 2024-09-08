@@ -2,6 +2,30 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { gql } from "graphql-tag"
 
+const usuarios = [
+    {
+        id: 1,
+        nome_completo: "Pedro Silva",
+        email: "pedro@email.com",
+        salario: 22000,
+        vip: true
+    },
+    {
+        id: 2,
+        nome_completo: "Ana Silva",
+        email: "ana@email.com",
+        salario: 2000,
+        vip: false
+    },
+    {
+        id: 3,
+        nome_completo: "Ian Silva",
+        email: "ian@email.com",
+        salario: 5000,
+        vip: true
+    }
+]
+
 const typeDefs = gql`
 scalar Data
 
@@ -12,6 +36,7 @@ type Query{
     melhorUsuario: Usuario!
     melhorProduto: Produto!
     numerosMegaSena: [Int!]!
+    usuarios: [Usuario!]!
 }
 
 type Usuario{
@@ -68,6 +93,9 @@ const resolvers = {
             })
             const arrOrdenado = arr.sort((a,b) => a-b)
             return arrOrdenado
+        },
+        usuarios(){
+            return usuarios
         }
 
     },
