@@ -5,13 +5,20 @@ import { gql } from "graphql-tag"
 const typeDefs = gql`
 type Query{
     ola:String
+    horaAtual:String
 }
 `
 
 const resolvers = {
     Query: {
         ola(){
-            return "Olá"
+            return "Oi"
+        },
+        horaAtual(){
+            const hora = new Date().getHours().toString().padStart(2,"0")
+            const minuto = new Date().getMinutes().toString().padStart(2,"0")
+            const segundos = new Date().getSeconds().toString().padStart(2,"0")
+            return `agora é ${hora}:${minuto}:${segundos}`
         }
     }
 }
