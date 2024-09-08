@@ -10,6 +10,7 @@ type Query{
     horaAtual:String
     dataAtual: Data
     melhorUsuario: Usuario!
+    melhorProduto: Produto!
 }
 
 type Usuario{
@@ -18,6 +19,14 @@ type Usuario{
     email:String
     salario:Float
     vip:Boolean
+}
+
+type Produto{
+    id: Int
+    nome: String
+    preco: Float
+    desconto: Float
+    precoComDesconto: Float
 }
 `
 
@@ -43,12 +52,27 @@ const resolvers = {
                 salario: 22000,
                 vip: true
             }
+        },
+        melhorProduto(){
+            return {
+                id:10,
+                nome: "Lápis",
+                preco: 10.00,
+                desconto: 0.1,
+            }
         }
+
     },
     Usuario:{
         nome(usuario){
             // console.log(usuario)
             return usuario.nome_completo
+        }
+    },
+    Produto:{
+        precoComDesconto(parent){
+            const {preco,desconto} = parent
+            return preco * ( 1- desconto )
         }
     }
 }
