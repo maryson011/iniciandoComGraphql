@@ -3,9 +3,12 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 import { gql } from "graphql-tag"
 
 const typeDefs = gql`
+scalar Data
+
 type Query{
-    ola:String
+    ola:String!
     horaAtual:String
+    dataAtual: Data
 }
 `
 
@@ -19,6 +22,9 @@ const resolvers = {
             const minuto = new Date().getMinutes().toString().padStart(2,"0")
             const segundos = new Date().getSeconds().toString().padStart(2,"0")
             return `agora é ${hora}:${minuto}:${segundos}`
+        },
+        dataAtual(){
+            return new Date()
         }
     }
 }
