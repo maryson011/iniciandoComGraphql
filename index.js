@@ -37,6 +37,7 @@ type Query{
     melhorProduto: Produto!
     numerosMegaSena: [Int!]!
     usuarios: [Usuario!]!
+    usuario(id:Int): Usuario
 }
 
 type Usuario{
@@ -96,6 +97,10 @@ const resolvers = {
         },
         usuarios(){
             return usuarios
+        },
+        usuario(_, args){
+            const id = args.id
+            return usuarios.find(u=>u.id === id)
         }
 
     },
