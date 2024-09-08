@@ -9,6 +9,15 @@ type Query{
     ola:String!
     horaAtual:String
     dataAtual: Data
+    melhorUsuario: Usuario!
+}
+
+type Usuario{
+    id:Int
+    nome:String
+    email:String
+    salario:Float
+    vip:Boolean
 }
 `
 
@@ -25,6 +34,14 @@ const resolvers = {
         },
         dataAtual(){
             return new Date()
+        },
+        melhorUsuario(){
+            return {
+                id: 1,
+                nome: "Pedro",
+                email: "pedro@email.com",
+                vip: true
+            }
         }
     }
 }
