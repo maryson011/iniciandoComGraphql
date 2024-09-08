@@ -34,3 +34,4 @@ grapghql.com
         Ele é amplamente utilizado por quem deseja criar APIs mais flexíveis e eficientes, aproveitando as capacidades do GraphQL.
         =================================================================================
 --> npm i -D nodemon@3.0.1
+--> npm i graphql-tag
