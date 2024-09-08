@@ -11,6 +11,7 @@ type Query{
     dataAtual: Data
     melhorUsuario: Usuario!
     melhorProduto: Produto!
+    numerosMegaSena: [Int!]!
 }
 
 type Usuario{
@@ -60,6 +61,13 @@ const resolvers = {
                 preco: 10.00,
                 desconto: 0.1,
             }
+        },
+        numerosMegaSena(){
+            const arr = Array(6).fill(0).map(()=>{
+                return Math.round(Math.random()*60)
+            })
+            const arrOrdenado = arr.sort((a,b) => a-b)
+            return arrOrdenado
         }
 
     },
