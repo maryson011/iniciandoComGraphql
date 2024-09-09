@@ -26,6 +26,10 @@ const usuarios = [
     }
 ]
 
+const perfis = [
+    {id:10, nome: "Comum"}, {id:11, nome: "administrador"}
+]
+
 const typeDefs = gql`
 scalar Data
 
@@ -38,6 +42,8 @@ type Query{
     numerosMegaSena: [Int!]!
     usuarios: [Usuario!]!
     usuario(id:Int): Usuario
+    perfis: [Perfil!]!
+    perfil(id:Int): Perfil
 }
 
 type Usuario{
@@ -54,6 +60,11 @@ type Produto{
     preco: Float
     desconto: Float
     precoComDesconto: Float
+}
+
+type Perfil{
+    id:Int
+    nome:String
 }
 `
 
@@ -101,6 +112,12 @@ const resolvers = {
         usuario(_, args){
             const id = args.id
             return usuarios.find(u=>u.id === id)
+        },
+        perfis(){
+            return perfis
+        },
+        perfil(_, {id}){
+            return perfis.find(p=>p.id === id)
         }
 
     },
@@ -115,7 +132,7 @@ const resolvers = {
             const {preco,desconto} = parent
             return preco * ( 1- desconto )
         }
-    }
+    },
 }
 
 const servidor = new ApolloServer({typeDefs, resolvers})
