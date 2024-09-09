@@ -35,3 +35,26 @@ grapghql.com
         =================================================================================
 --> npm i -D nodemon@3.0.1
 --> npm i graphql-tag
+
+
+- Fragment
+
+    fragment emailNome on Usuario{
+        nome email
+    }
+
+    query Perfis {
+        usuario(id:1) {
+            ...emailNome
+        }
+        usuarios {
+            ...usuarioCompleto
+        }
+    }
+
+    fragment usuarioCompleto on Usuario {
+        email id nome salario vip
+        perfil {
+            nome id
+        }
+    }
