@@ -8,21 +8,24 @@ const usuarios = [
         nome_completo: "Pedro Silva",
         email: "pedro@email.com",
         salario: 22000,
-        vip: true
+        vip: true,
+        id_perfil: 10
     },
     {
         id: 2,
         nome_completo: "Ana Silva",
         email: "ana@email.com",
         salario: 2000,
-        vip: false
+        vip: false,
+        id_perfil: 11
     },
     {
         id: 3,
         nome_completo: "Ian Silva",
         email: "ian@email.com",
         salario: 5000,
-        vip: true
+        vip: true,
+        id_perfil: 10
     }
 ]
 
@@ -47,11 +50,12 @@ type Query{
 }
 
 type Usuario{
-    id:Int
-    nome:String
-    email:String
-    salario:Float
-    vip:Boolean
+    id: Int
+    nome: String
+    email: String
+    salario: Float
+    vip: Boolean
+    perfil: Perfil
 }
 
 type Produto{
@@ -123,8 +127,10 @@ const resolvers = {
     },
     Usuario:{
         nome(usuario){
-            // console.log(usuario)
             return usuario.nome_completo
+        },
+        perfil(usuario){
+            return perfis.find(p=>p.id === usuario.id_perfil)
         }
     },
     Produto:{
