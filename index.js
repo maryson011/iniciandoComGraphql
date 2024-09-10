@@ -9,7 +9,8 @@ const usuarios = [
         email: "pedro@email.com",
         salario: 22000,
         vip: true,
-        id_perfil: 10
+        id_perfil: 10,
+        status: "ATIVO"
     },
     {
         id: 2,
@@ -17,7 +18,8 @@ const usuarios = [
         email: "ana@email.com",
         salario: 2000,
         vip: false,
-        id_perfil: 11
+        id_perfil: 11,
+        status: "INATIVO"
     },
     {
         id: 3,
@@ -25,7 +27,8 @@ const usuarios = [
         email: "ian@email.com",
         salario: 5000,
         vip: true,
-        id_perfil: 10
+        id_perfil: 10,
+        status: "BLOQUEADO"
     }
 ]
 
@@ -35,6 +38,12 @@ const perfis = [
 
 const typeDefs = gql`
 scalar Data
+
+enum Status{
+    ATIVO
+    INATIVO
+    BLOQUEADO
+}
 
 type Query{
     ola:String!
@@ -56,6 +65,7 @@ type Usuario{
     salario: Float
     vip: Boolean
     perfil: Perfil
+    status: Status
 }
 
 type Produto{
