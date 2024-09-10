@@ -1,6 +1,14 @@
+let id = 1
+
+export const proximoId = () => id++
+
+export const setUsuarios = (novosUsuarios)=>{
+    usuarios = novosUsuarios
+}
+
 export let usuarios = [
     {
-        id: 1,
+        id: proximoId(),
         nome_completo: "Pedro Silva",
         email: "pedro@email.com",
         salario: 22000,
@@ -9,7 +17,7 @@ export let usuarios = [
         status: "ATIVO"
     },
     {
-        id: 2,
+        id: proximoId(),
         nome_completo: "Ana Silva",
         email: "ana@email.com",
         salario: 2000,
@@ -18,7 +26,7 @@ export let usuarios = [
         status: "INATIVO"
     },
     {
-        id: 3,
+        id: proximoId(),
         nome_completo: "Ian Silva",
         email: "ian@email.com",
         salario: 5000,
