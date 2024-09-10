@@ -1,6 +1,8 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import { gql } from "graphql-tag"
+import { loadFiles } from "@graphql-tools/load-files";
+
+
 
 const usuarios = [
     {
@@ -35,52 +37,6 @@ const usuarios = [
 const perfis = [
     {id:10, nome: "Comum"}, {id:11, nome: "administrador"}
 ]
-
-const typeDefs = gql`
-scalar Data
-
-enum Status{
-    ATIVO
-    INATIVO
-    BLOQUEADO
-}
-
-type Query{
-    ola:String!
-    horaAtual:String
-    dataAtual: Data
-    melhorUsuario: Usuario!
-    melhorProduto: Produto!
-    numerosMegaSena: [Int!]!
-    usuarios: [Usuario!]!
-    usuario(id:Int): Usuario
-    perfis: [Perfil!]!
-    perfil(id:Int): Perfil
-}
-
-type Usuario{
-    id: Int
-    nome: String
-    email: String
-    salario: Float
-    vip: Boolean
-    perfil: Perfil
-    status: Status
-}
-
-type Produto{
-    id: Int
-    nome: String
-    preco: Float
-    desconto: Float
-    precoComDesconto: Float
-}
-
-type Perfil{
-    id:Int
-    nome:String
-}
-`
 
 const resolvers = {
     Query: {
@@ -151,7 +107,10 @@ const resolvers = {
     },
 }
 
-const servidor = new ApolloServer({typeDefs, resolvers})
+const servidor = new ApolloServer({
+    typeDefs: await loadFiles("./schema/*.graphql"), 
+    resolvers
+})
 
 const { url } = await startStandaloneServer(servidor, {listen: 4001})
 

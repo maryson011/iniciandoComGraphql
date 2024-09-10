@@ -58,3 +58,6 @@ grapghql.com
             nome id
         }
     }
+
+
+--> npm i @graphql-tools/load-files@7.0.0
